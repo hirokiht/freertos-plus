@@ -67,8 +67,7 @@ int filedump(const char *filename){
 	char buf[128];
 
 	int fd=fs_open(filename, 0, O_RDONLY);
-
-	if(fd==OPENFAIL)
+	if(fd==OPENFAIL || fd < 0)
 		return 0;
 
 	fio_printf(1, "\r\n");
