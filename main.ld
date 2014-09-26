@@ -14,9 +14,9 @@ SECTIONS
  		*(.text)
  		*(.text.*)
 		*(.rodata)
-		_sromfs = .;
-                *(.rom.*)
-		_eromfs = .;
+		_sromfs = .;	/* Start ROM fs*/
+                *(.romfs.*)	/* ROM fs content */
+		_eromfs = .;	/* End ROM fs */
 		_sidata = .;
 	} >FLASH
 
