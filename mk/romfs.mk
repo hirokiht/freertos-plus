@@ -6,15 +6,10 @@ $(OUTDIR)/$(ROMDIR).o: $(OUTDIR)/$(ROMDIR).bin
 	@$(CROSS_COMPILE)objcopy -I binary -O elf32-littlearm -B arm \
 		--prefix-sections '.romfs' $< $@
 
-$(OUTDIR)/$(ROMDIR).bin: $(ROMDIR) $(OUTDIR)/$(TOOLDIR)/mkromfs
+$(OUTDIR)/$(ROMDIR).bin: $(ROMDIR)
 	@mkdir -p $(dir $@)
 	@echo "    MKROMFS "$@
-	@$(OUTDIR)/$(TOOLDIR)/mkromfs -d $< $@
+	@genromfs -v -d $< -f $@
 
 $(ROMDIR):
 	@mkdir -p $@
-
-$(OUTDIR)/%/mkromfs: %/mkromfs.c
-	@mkdir -p $(dir $@)
-	@echo "    CC      "$@
-	@gcc -Wall -o $@ $^
