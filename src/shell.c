@@ -72,8 +72,7 @@ int filedump(const char *filename){
 
 	fio_printf(1, "\r\n");
 
-	int count;
-	while((count=fio_read(fd, buf, sizeof(buf)))>0){
+	for(int count = fio_read(fd, buf, sizeof(buf)) ; count > 0 ; count = fio_read(fd, buf, sizeof(buf))){
 		fio_write(1, buf, count);
 	}
 
